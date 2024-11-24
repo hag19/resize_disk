@@ -1,4 +1,4 @@
-# resize_disk
+# resize VM disk in Proxmox
 
 ## resize the size of the disk
 ```bash
