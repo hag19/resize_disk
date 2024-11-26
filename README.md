@@ -14,9 +14,9 @@ sudo pvcreate /dev/sdb2
 ```
 ---
 ```bash
-vgcreate esgivg /dev/sdb
-lvcreate -L 5G -n lv_esgi esgivg
-lvcreate -l 90%FREE -n lv_esgi2 esgivg
+sudo vgcreate esgivg /dev/sdb1
+sudo lvcreate -L 5G -n lv_esgi esgivg
+sudo lvcreate -l 90%FREE -n lv_esgi2 esgivg
 ```
 ### Important: When deleting a partition, ensure you're only deleting the partition between sda1 and the unallocated space (usually sda2), not the root partition (sda1) itself.
 ```bash
