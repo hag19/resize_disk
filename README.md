@@ -42,9 +42,9 @@ sudo lvcreate -l <percentage>%FREE -n <volume_name> <group_name>
 ### Prepare Filesystem and Update fstab
 ```bash
 echo "#[name of volume]" >> /etc/fstab
-echo "/dev/mapper/name_of_volume /name_of_volume ext4 defaults 0 2" >> /etc/fstab
+echo "/dev/mapper/<volume_name> /name_of_volume ext4 defaults 0 2" >> /etc/fstab
 sudo mkfs.ext4 /dev/mapper/<volume_name>
-sudo mkdir /<mount_point>
+sudo mkdir /<volume_name>
 sudo mount -a
 ```
 * Steps:
