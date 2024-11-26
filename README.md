@@ -13,6 +13,11 @@ sudo echo "- - -" | sudo tee /sys/class/scsi_host/host*/scan
 sudo pvcreate /dev/sdb2
 ```
 ---
+```bash
+vgcreate esgivg /dev/sdb
+lvcreate -L 5G -n lv_esgi esgivg
+lvcreate -l 90%FREE -n lv_esgi2 esgivg
+```
 ### Important: When deleting a partition, ensure you're only deleting the partition between sda1 and the unallocated space (usually sda2), not the root partition (sda1) itself.
 ```bash
 sudo cfdisk /dev/sda
