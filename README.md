@@ -27,7 +27,7 @@ sudo cfdisk /dev/sdb
 sudo echo "- - -" | sudo tee /sys/class/scsi_host/host*/scan
 sudo pvcreate /dev/sdb1
 ```
----
+
 ### Create Volume Group and Logical Volumes
 ```bash
 sudo vgcreate <group_name> /dev/sdb1
@@ -38,7 +38,7 @@ sudo lvcreate -l <percentage>%FREE -n <volume_name> <group_name>
 * Details:
   * Use vgcreate to create a volume group from the initialized physical volume (/dev/sdb1).
   * Create logical volumes with specific sizes or percentages of free space.
----
+
 ### Prepare Filesystem and Update fstab
 ```bash
 echo "#[name of volume]" >> /etc/fstab
@@ -52,7 +52,7 @@ sudo mount -a
   * Create a directory as the mount point.
   * Add the volume to /etc/fstab for persistent mounting.
   * Run mount -a to apply changes.
----
+
 ### reduce or extend volum 
 * Use - for reducing and + for extending.
 * The -r flag resizes the filesystem along with the logical volume.
