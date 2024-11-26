@@ -1,41 +1,35 @@
 # resize VM disk in Proxmox
-
-## resize the disk
-```bash
-qm resize id scsi0 120G
-qm config id
-```
 ---
-## connect to the vm and then resize with cfdisk
 ## find new disk if you are adding
 ```bash
 sudo echo "- - -" | sudo tee /sys/class/scsi_host/host*/scan
 sudo pvcreate /dev/sdb2
 ```
 ---
+## create the volumes and goup
 ```bash
-sudo vgcreate esgivg /dev/sdb1
-sudo lvcreate -L 5G -n lv_esgi esgivg
-sudo lvcreate -l 90%FREE -n lv_esgi2 esgivg
-```
-### Important: When deleting a partition, ensure you're only deleting the partition between sda1 and the unallocated space (usually sda2), not the root partition (sda1) itself.
-```bash
-sudo cfdisk /dev/sda
-```
-## move to the portion and delete it sicne its going to be between new allocated space and the sda1 we will realocate them back
-## now command to resize for the system and verifay it
-```bash
-sudo resize2fs /dev/sda1
-df -h
-lsblk
+sudo vgcreate replace_with_your_name /dev/sdb1
+sudo lvcreate -L chose_the_sizeG -n replace_with_your_name replace_with_group_name
+sudo lvcreate -l chose_the_procent%FREE -n replace_with_your_name
 ```
 ---
-## now we will reallocat the memory
+## create now direction and change fstab file
 ```bash
-sudo mkswap /dev/sda5
-sudo swapon /dev/sda5
-echo '/dev/sda5 none swap sw 0 0' | sudo tee -a /etc/fstab
+echo "#[name of volume]" >> /etc/fstab
+echo "/dev/mapper/name_of_volume /name_of_volume ext4 defaults 0 2" >> /etc/fstab
+sudo mkfs.ext4 /dev/mapper/name_of_vomulumes
+sudo mkdir /name_of_volume
+sudo mount -a
 ```
-* mkswap: Initializes the swap space on /dev/sda5.
-* swapon: Activates the swap partition.
-* echo '/dev/sda5 none swap sw 0 0' | sudo tee -a /etc/fstab: This command ensures that the swap partition will be mounted automatically on boot by adding it to /etc/fstab.
+---
+# reduce or extend volum 
+## reduce and extend with amount of G
+```bash
+sudo lvreduce -r -L -replace_with_amount_of_G /dev/mapper/name_of_volume
+sudo lvextend -r -L -replace_with_amount_of_G /dev/mapper/name_of_volume
+```
+## reduce and extend with procent of free memory
+```bash
+sudo lvreduce -r -l -replace_with_procent_%FREE /dev/mapper/name_of_volume
+sudo lvextend -r -l -replace_with_procent_%FREE /dev/mapper/name_of_volume
+```
