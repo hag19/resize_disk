@@ -1,5 +1,5 @@
 # resize VM disk in Proxmox
-## thers two ways to do it either you going to with cfdisk/fdisk or lvm(read heat tool)
+## thers two ways to do it either you going to with cfdisk/fdisk or LVM(Red Hat tool)
 ## cfdisk/fdisk solution 
 # Partition Resizing Using cfdisk
 ```bash
