@@ -1,11 +1,11 @@
 # resize VM disk in Proxmox
-## find new disk
+## find new disk if you are adding
 ```bash
 sudo echo "- - -" | sudo tee /sys/class/scsi_host/host*/scan
 sudo pvcreate /dev/sdb2
 ```
 ---
-## resize the size of the disk
+## resize the disk
 ```bash
 qm resize id scsi0 120G
 qm config id
