@@ -20,7 +20,7 @@ sudo cfdisk /dev/sdb
   * Use n to create a new partition.
   * Assign a partition number and size.
   * Use w to write changes.
---
+---
 ## lvm solution
 ### Find and Prepare New Disk
 ```bash
