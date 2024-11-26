@@ -1,10 +1,5 @@
 # resize VM disk in Proxmox
-## find new disk if you are adding
-```bash
-sudo echo "- - -" | sudo tee /sys/class/scsi_host/host*/scan
-sudo pvcreate /dev/sdb2
-```
----
+
 ## resize the disk
 ```bash
 qm resize id scsi0 120G
@@ -12,6 +7,12 @@ qm config id
 ```
 ---
 ## connect to the vm and then resize with cfdisk
+## find new disk if you are adding
+```bash
+sudo echo "- - -" | sudo tee /sys/class/scsi_host/host*/scan
+sudo pvcreate /dev/sdb2
+```
+---
 ### Important: When deleting a partition, ensure you're only deleting the partition between sda1 and the unallocated space (usually sda2), not the root partition (sda1) itself.
 ```bash
 sudo cfdisk /dev/sda
