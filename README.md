@@ -1,4 +1,5 @@
 # resize VM disk in Proxmox
+# if you want to resize your phisical disk that is in use, then you have to boot into with live iso, and then youll be able to resize since you cannot resize physical disk that is in use
 # thers two ways to do it either you going to with cfdisk/fdisk or LVM(Red Hat tool)
 ## cfdisk/fdisk solution 
 
